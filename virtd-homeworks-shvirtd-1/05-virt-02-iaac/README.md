@@ -26,6 +26,16 @@
 - [Packer](https://github.com/netology-code/devops-materials/blob/master/README.md) версии 1.9.х + плагин от Яндекс Облако по [инструкции](https://cloud.yandex.ru/docs/tutorials/infrastructure-management/packer-quickstart)
 - [уandex cloud cli](https://cloud.yandex.com/ru/docs/cli/quickstart) Так же инициализируйте профиль с помощью ```yc init``` .
 
+### Ответ к задаче 1
+1. Установлен vagrant версии 2.3.4.
+   <img width="650" height="108" alt="image" src="https://github.com/user-attachments/assets/3b6cabaf-8438-4c6b-832f-1e1c614488ba" />
+2. Установлен Packer версии 1.15.0
+   <img width="571" height="47" alt="image" src="https://github.com/user-attachments/assets/6cb5511c-7eb9-4a01-8392-f338f3126980" />
+   и плагин от Яндекс Облако
+   <img width="569" height="196" alt="image" src="https://github.com/user-attachments/assets/bc831447-22e1-4d8c-961f-5b532ac11f71" />
+3. Установлен yandex cloude cli и инициализирован профиль
+   <img width="689" height="104" alt="image" src="https://github.com/user-attachments/assets/b4c47927-4800-4d42-8d7e-37293c4e6dff" />
+
 
 Примечание: Облачная ВМ с Linux в данной задаче не подойдёт из-за ограничений облачного провайдера. У вас просто не установится virtualbox.
 
