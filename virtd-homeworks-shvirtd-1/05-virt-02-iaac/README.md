@@ -74,6 +74,15 @@ Error: The requested URL returned error: 404:
 
 - Если ваша рабочая станция в меру различных факторов не может запустить вложенную виртуализацию - допускается неполное выполнение(до ошибки запуска ВМ)
 
+### Ответ к задаче 2
+1. Создана виртуальная машина с hostname=server
+   <img width="681" height="182" alt="image" src="https://github.com/user-attachments/assets/bb8bd706-9ccc-4479-b4ef-603a5795d00b" />
+2. Информация после входа в созданную виртуальную машину
+   <img width="785" height="466" alt="image" src="https://github.com/user-attachments/assets/88f72006-714e-42ad-87e3-0897db811ed8" />
+3. Команда docker version && docker compose version
+   <img width="777" height="282" alt="image" src="https://github.com/user-attachments/assets/5f7738d9-b806-48a5-b056-36f6c3630a7e" />
+
+
 ## Задача 3
 
 1. Отредактируйте файл    [mydebian.json.pkr.hcl](https://github.com/netology-code/virtd-homeworks/blob/shvirtd-1/05-virt-02-iaac/src/mydebian.json.pkr.hcl)  или [mydebian.jsonl](https://github.com/netology-code/virtd-homeworks/blob/shvirtd-1/05-virt-02-iaac/src/mydebian.json) в директории src (packer умеет и в json, и в hcl форматы):
