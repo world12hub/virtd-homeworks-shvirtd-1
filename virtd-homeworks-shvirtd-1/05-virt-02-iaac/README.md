@@ -95,3 +95,16 @@ Error: The requested URL returned error: 404:
 7. Удалите ВМ и образ.
 8. **ВНИМАНИЕ!** Никогда не выкладываете oauth token от облака в git-репозиторий! Утечка секретного токена может привести к финансовым потерям. После выполнения задания обязательно удалите секретные данные из файла mydebian.json и mydebian.json.pkr.hcl. (замените содержимое токена на  "ххххх")
 9. В качестве ответа на задание  загрузите результирующий файл в ваш ЛК.
+
+### Ответ к задаче 3
+1. Отредактирован файл mydebian.json и добавлен в скрипт установка docker, а также дополнительно установлены htop и tmux.
+   Выполнена команда yc compute image list. Итого:
+   <img width="848" height="238" alt="image" src="https://github.com/user-attachments/assets/ef08da22-373d-4e78-b08b-131e3aa7287e" />
+2. В web консоли yandex cloude имеется образ debian-11
+   <img width="909" height="100" alt="image" src="https://github.com/user-attachments/assets/2df0bfdd-b44b-415d-b172-7a49b03b97e2" />
+3. Создана виртуальная машина в облаке, используя образ
+<img width="1796" height="99" alt="image" src="https://github.com/user-attachments/assets/10677229-0a52-43cf-b98f-38a692e11b85" />
+
+4. Осуществлено подклбчение по ssh и проверка в наличии установленного docker
+<img width="892" height="76" alt="image" src="https://github.com/user-attachments/assets/43002268-64a7-40fd-99c9-d1c1f2364115" />
+5. Файл [mydebian.json](https://github.com/world12hub/virtd-homeworks-shvirtd-1/blob/main/virtd-homeworks-shvirtd-1/05-virt-02-iaac/src/mydebian.json) для создания образа 
