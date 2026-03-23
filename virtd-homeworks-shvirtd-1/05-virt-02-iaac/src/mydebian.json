@@ -2,7 +2,7 @@
     "builders": [
         {
             "type": "yandex",
-            "token": "y0__xCo--7KBRjB3RMgp7TV6RaZvulcRhIKo_uJ7IvxNQy5S_yDvw",
+            "token": "y0__xCo--7KBR",
             "folder_id": "b1g133inh4mh0get24ds",
             "zone": "ru-central1-a",
             "image_name": "debian-11-docker",
