@@ -2,24 +2,37 @@
     "builders": [
         {
             "type": "yandex",
-            "token": "y0_AgAAAAA...это точно секретные данные!",
-            "folder_id": "b1gfu..не секретные данные",
+            "token": "y0__xCo--7KBRjB3RMgp7TV6RaZvulcRhIKo_uJ7IvxNQy5S_yDvw",
+            "folder_id": "b1g133inh4mh0get24ds",
             "zone": "ru-central1-a",
             "image_name": "debian-11-docker",
             "image_description": "my custom debian with docker",
             "source_image_family": "debian-11",
-            "subnet_id": "e9bhm45v9j5tna68jf9n...совсем не секретные данные",
+            "subnet_id": "e9beb9t2d4mjea8h0gis",
             "use_ipv4_nat": true,
             "disk_type": "network-hdd",
             "ssh_username": "debian"
         }
     ],
     "provisioners": [
-        {
-            "type": "shell",
-            "inline": [
-                "echo 'hello from packer'"
-            ]
-        }
-    ]
+    {
+        "type": "shell",
+        "inline": [
+            "echo 'hello from packer'",
+            "sudo sed -i '/bullseye-backports/s/^/#/' /etc/apt/sources.list",
+            "sudo rm -f /etc/apt/sources.list.d/*bullseye-backports* 2>/dev/null || true",
+            "sudo apt-get update",
+            "sudo apt-get install -y htop tmux",
+            "sudo apt-get install -y ca-certificates curl gnupg",
+            "sudo install -m 0755 -d /etc/apt/keyrings",
+            "curl -fsSL https://download.docker.com/linux/debian/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg",
+            "sudo chmod a+r /etc/apt/keyrings/docker.gpg",
+            "echo \"deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/debian $(. /etc/os-release && echo \\\"$VERSION_CODENAM>
+            "sudo apt-get update",
+            "sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin",
+            "sudo usermod -aG docker debian",
+            "sudo sed -i '/^#.*bullseye-backports/s/^#//' /etc/apt/sources.list"
+        ]
+    }
+  ]
 }
