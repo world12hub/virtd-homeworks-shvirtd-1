@@ -107,4 +107,5 @@ Error: The requested URL returned error: 404:
 
 4. Осуществлено подклбчение по ssh и проверка в наличии установленного docker
 <img width="892" height="76" alt="image" src="https://github.com/user-attachments/assets/43002268-64a7-40fd-99c9-d1c1f2364115" />
-5. Файл [mydebian.jsonl](https://github.com/world12hub/virtd-homeworks-shvirtd-1/blob/main/virtd-homeworks-shvirtd-1/05-virt-02-iaac/src/mydebian.json) для создания образа 
+5. Файл [mydebian.jsonl](https://github.com/world12hub/virtd-homeworks-shvirtd-1/blob/main/virtd-homeworks-shvirtd-1/05-virt-02-iaac/src/mydebian.json) для создания образа
+6. [VirtualBox](https://www.virtualbox.org/) 
