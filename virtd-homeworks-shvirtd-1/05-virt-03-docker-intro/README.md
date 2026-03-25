@@ -202,6 +202,115 @@ curl localhost:8080
 
 В качестве ответа приложите скриншоты консоли, где видно все введенные команды и их вывод.
 
+### Ответ к задаче 3
+
+1. Подключение к стандартному потоку ввода/вывода/ошибок контейнера "custom-nginx-t2" осуществляется через команду: 
+```
+docker attach <Имя_контенера>
+```
+
+2. Подключние к контейнеру:
+
+```
+docker attach custom-nginx-t2
+```
+
+Скриншот:
+<img width="1041" height="618" alt="image" src="https://github.com/user-attachments/assets/1a4d5120-65eb-4a88-b30f-804a927e0ac7" />
+
+3. Просмотр всех созданных контейнеров:
+```
+docker ps –a 
+```
+Скриншот:
+
+<img width="1041" height="125" alt="image" src="https://github.com/user-attachments/assets/b32c7355-0524-469e-82e6-81f35a4c8708" />
+
+Причина остановки контейнера заключается в том, что подключение было непосредственно к основному процессу контейнера, а комбинация Ctrl-C завершила процесс, соответственно приостановила работу контенйнера.
+
+4. Перезапуск контейнера 
+```
+docker restart custom-nginx-t2
+```
+Скриншот:
+<img width="856" height="87" alt="image" src="https://github.com/user-attachments/assets/06214ff9-56c4-4ab7-89dc-caeac7720c52" />
+
+
+5. Вход в интерактивный терминал контейнера "custom-nginx-t2" с оболочкой bash.
+```
+docker exec–it custom-nginx-t2 bash
+```
+Скриншот:
+
+<img width="939" height="75" alt="image" src="https://github.com/user-attachments/assets/f9f76b47-97f4-41f5-8ed0-436eeb585b1d" />
+
+6. Установка текстового редактора nano с помощью apt-get.
+```
+apt-get update 
+apt-get install nano
+```
+
+Скриншот:
+
+<img width="1041" height="440" alt="image" src="https://github.com/user-attachments/assets/b65ffc9f-499e-45f8-929a-5056e314baad" />
+ 
+7. Отредактирован файл "/etc/nginx/conf.d/default.conf", заменив порт "listen 80" на "listen 81".
+```
+nano /etc/nginx/conf.d/default.conf
+```
+Скриншот:
+
+<img width="954" height="316" alt="image" src="https://github.com/user-attachments/assets/17927781-d7fb-460e-84b8-7943020b0267" />
+ 
+8. Запомните(!) и выполните команду nginx -s reload, а затем внутри контейнера curl http://127.0.0.1:80 ; curl http://127.0.0.1:81.
+```
+nginx -s reload
+curl http://127.0.0.1:80 
+curl http://127.0.0.1:81
+```
+Скриншот:
+
+ <img width="1041" height="380" alt="image" src="https://github.com/user-attachments/assets/f2f32513-79f4-4c34-9f8f-14d68dcd745e" />
+
+9. Выход из контейнера, набрав в консоли exit или Ctrl-D.
+
+10. Проверка вывода команд: ss -tlpn | grep 127.0.0.1:8080 , docker port custom-nginx-t2, curl http://127.0.0.1:8080. Кратко объясните суть возникшей проблемы.
+
+```
+ss -tlpn | grep 127.0.0.1:8080
+docker port custom-nginx-t2
+curl http://127.0.0.1:8080
+```
+Скриншот:
+
+ <img width="1041" height="259" alt="image" src="https://github.com/user-attachments/assets/a826d84d-a517-4d50-a3ab-b441d60f5fed" />
+
+Проблема в сетевом соединении host-машины с docker-контейнером, из-за внесенных изменений в конфигурационный файл веб-сервера nginx.
+
+11.  Решение проблемы с доступом к веб-ресурсу 127.0.0.1:8080
+```
+docker stop custom-nginx-t2
+docker commit custom-nginx-t2 world12dockerhub/custom-nginx-t2:1.1.0
+docker rename custom-nginx-t2 custom-nginx-t2-old
+docker stop custom-nginx-t2-old
+docker run --name custom-nginx-t2 -p 127.0.0.1:8080:81 -d world12dockerhub/custom-nginx-t2:1.1.0
+curl 127.0.0.1:8080
+```
+
+Скриншот:
+
+<img width="1041" height="407" alt="image" src="https://github.com/user-attachments/assets/7376cc94-ce98-4582-b49b-ddd659773760" /> 
+
+12. Удаление запущенного контейнера "custom-nginx-t2", не останавливая его.
+```
+docker rm –f custom-nginx-t2
+```
+Скриншот:
+
+<img width="823" height="83" alt="image" src="https://github.com/user-attachments/assets/1bd3a661-2d35-49e6-a44e-9896f6e30078" />
+
+
+
 ## Задача 4
 
 
