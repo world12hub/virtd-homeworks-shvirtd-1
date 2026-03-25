@@ -29,6 +29,111 @@ Hey, Netology
 - Соберите и отправьте созданный образ в свой dockerhub-репозитории c tag 1.0.0 (ТОЛЬКО ЕСЛИ ЕСТЬ ДОСТУП). 
 - Предоставьте ответ в виде ссылки на https://hub.docker.com/<username_repo>/custom-nginx/general .
 
+### Ответ к задаче № 1
+
+1. Установлен **docker** и **docker-compose**:
+```
+apt-get update
+apt-get install docker-engine containerd docker-compose 
+usermod $USER -aG docker
+systemctl enable --now docker
+```
+Скриншот:
+
+<img width="1041" height="303" alt="image" src="https://github.com/user-attachments/assets/83725fad-ba98-4d4e-a3ee-63dec555948f" />
+
+<img width="712" height="186" alt="image" src="https://github.com/user-attachments/assets/cf83889e-a129-4fd9-a641-6b9a47835b5e" />
+
+2. На **hub.docker.com** создан публичный репозиторий с именем **custom-nginx** <https://hub.docker.com/repository/docker/world12dockerhub/custom-nginx/>
+
+Скриншот:
+
+<img width="1041" height="297" alt="image" src="https://github.com/user-attachments/assets/8e0a3313-d3b7-4af9-9523-b0f1d5e79831" />
+
+3. Скачан образ **nginx:1.29.0**:
+
+```
+docker pull nginx:1.29.0
+docker image list
+```
+
+Скриншот:
+
+<img width="1041" height="367" alt="image" src="https://github.com/user-attachments/assets/2510a023-6ad1-440d-ac8f-800f388e2104" />
+
+4. Создание Dockerfile и реализация в нем замены дефолтной индекс-страницы(/usr/share/nginx/html/index.html), на файл index.html:
+
+4.1. Создание Dockerfile файла со следующим монифестом 
+
+```
+tee ~/docker_project/Dockerfile <<- 'EOF'
+FROM nginx:1.29.0
+COPY index.html /usr/share/nginx/html/index.html
+EXPOSE 80
+EOF
+```
+Скриншот: 
+
+<img width="1041" height="133" alt="image" src="https://github.com/user-attachments/assets/76661f3e-e811-4e4e-b20e-b62923d36dca" />
+
+4.2. Создание файла index.html с содержимым:
+
+```
+nano index.html
+```
+```
+<html>
+<head>
+Hey, Netology
+</head>
+<body>
+<h1>I will be DevOps Engineer!</h1>
+</body>
+</html>
+```
+
+Скриншот:
+
+<img width="973" height="342" alt="image" src="https://github.com/user-attachments/assets/60399420-1d2b-42eb-8b9d-b3fef4388d73" />
+
+5. Сборка и отправка созданного образ в свой dockerhub-репозитории c tag 1.0.0
+
+5.1. Вход в docker-репозиторий 
+```
+docker login -u world12dockerhub
+Username: username
+Password: password 
+```
+
+Скриншот:
+
+<img width="1041" height="331" alt="image" src="https://github.com/user-attachments/assets/1becb13a-08a6-42bd-ba46-6a2b6611d328" />
+
+5.2. Сборка образа
+```
+docker buildx build –t world12dockerhub/custom-nginx:1.0.0 .
+```
+
+Скриншот:
+
+<img width="1041" height="351" alt="image" src="https://github.com/user-attachments/assets/4c196104-d0c7-473e-a2fc-fb76bf08a09a" />
+
+5.3. Отпавка образа
+
+```
+docker push world12dockerhub/custom-nginx:1.0.0
+```
+
+Скриншот:
+
+<img width="1041" height="264" alt="image" src="https://github.com/user-attachments/assets/23cbf96a-71b5-40a5-9a7c-cd6c67742a8e" />
+
+6. Ссылка на репозиторий <https://hub.docker.com/repository/docker/world12dockerhub/custom-nginx/>
+
+Скриншот:
+
+<img width="1041" height="433" alt="image" src="https://github.com/user-attachments/assets/dfc56f49-120e-406c-bc21-5730e087a2de" />
+
 ## Задача 2
 1. Запустите ваш образ custom-nginx:1.0.0 командой docker run в соответвии с требованиями:
 - имя контейнера "ФИО-custom-nginx-t2"
