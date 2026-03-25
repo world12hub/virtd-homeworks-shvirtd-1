@@ -145,6 +145,46 @@ docker push world12dockerhub/custom-nginx:1.0.0
 
 В качестве ответа приложите скриншоты консоли, где видно все введенные команды и их вывод.
 
+### Ответ к задаче 2
+
+1.	Запуск образа custom-nginx:1.0.0
+``` 
+docker run --name "kanyugin-sergey-custom-nginx-t2" -p 127.0.0.1:8080:80 -d world12dockerhub/custom-nginx:1.0.0
+```
+
+Скриншот:
+
+<img width="1041" height="76" alt="image" src="https://github.com/user-attachments/assets/4f1699d8-58a5-455d-8183-174b0af445ad" />
+
+<img width="1041" height="124" alt="image" src="https://github.com/user-attachments/assets/364df78f-0129-40e0-9527-b79f919c37c9" />
+
+2. Переименование контейнера в "custom-nginx-t2"
+```
+docker rename kanyugin-sergey-custom-nginx-t2 custom-nginx-t2 
+```
+
+Скриншот:
+
+<img width="1041" height="153" alt="image" src="https://github.com/user-attachments/assets/075306a6-2af3-42d4-a071-1f518a490163" />
+
+3. Выполнение команды:
+```
+date +"%d-%m-%Y %T.%N %Z" ; sleep 0.150 ; docker ps ; ss -tlpn | grep 127.0.0.1:8080  ; docker logs custom-nginx-t2 -n1 ; docker exec -it custom-nginx-t2 base64 /usr/share/nginx/html/index.html
+```
+
+Скриншот:
+
+<img width="1041" height="107" alt="image" src="https://github.com/user-attachments/assets/205f9b26-9da0-4b3e-8a55-481c39e56371" />
+
+4. Проверка доступности страницы
+
+```
+curl localhost:8080
+```
+
+Скриншот:
+
+<img width="948" height="298" alt="image" src="https://github.com/user-attachments/assets/d33cfde1-78fd-4185-94bf-a4abce50c710" />
 
 ## Задача 3
 1. Воспользуйтесь docker help или google, чтобы узнать как подключиться к стандартному потоку ввода/вывода/ошибок контейнера "custom-nginx-t2".
