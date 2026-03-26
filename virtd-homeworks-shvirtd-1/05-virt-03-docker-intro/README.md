@@ -323,6 +323,58 @@ docker rm –f custom-nginx-t2
 
 В качестве ответа приложите скриншоты консоли, где видно все введенные команды и их вывод.
 
+### Ответ к задаче 4
+
+1. Запущен первый контейнер из образа centos c любым тегом в фоновом режиме, подключив папку текущий рабочий каталог $(pwd) на хостовой машине в /data контейнера, используя ключ -v.
+
+```
+docker run -d -v $(pwd):/data --name centos_cont centos:7 sleep infinity
+```
+
+Скриншот:
+
+<img width="1041" height="132" alt="image" src="https://github.com/user-attachments/assets/f6f728dc-905a-4013-9cf9-779ca198e7e3" />
+
+2. Запущен второй контейнер из образа debian в фоновом режиме, подключив текущий рабочий каталог $(pwd) в /data контейнера.
+
+```
+docker run -d -v $(pwd):/data --name debian_cont debian:latest sleep infinity
+```
+Скриншот:
+
+<img width="1041" height="209" alt="image" src="https://github.com/user-attachments/assets/3344fc5b-3ec2-4b2a-9682-48731262c251" />
+
+3. Подключение к первому контейнеру с помощью docker exec и создание текстового файла file.json в /data.
+
+```
+docker exec -it centos_cont /bin/bash
+touch /data/file.json 
+exit
+```
+Скриншот:
+
+<img width="1033" height="150" alt="image" src="https://github.com/user-attachments/assets/67109fa4-c0a1-4415-bc07-6eaec03e966e" />
+ 
+4. Добавление ещё одного файл new_file.json в текущий каталог $(pwd) на хостовой машине.
+
+```
+touch new_file.json
+```
+
+Скриншот:
+
+<img width="1041" height="98" alt="image" src="https://github.com/user-attachments/assets/fc675a2c-7288-49c4-b900-8ae169d79a3f" /> 
+
+5. Подключение ко второму контейнеру и отображение листинга и содержания файлов в /data контейнера.
+
+```
+docker exec -it debian_cont /bin/bash
+ls  –ll /data
+```
+Скриншот:
+
+<img width="1041" height="248" alt="image" src="https://github.com/user-attachments/assets/2b3307b1-5001-4ed3-a363-55da645b81d4" />
+
 
 ## Задача 5
 
