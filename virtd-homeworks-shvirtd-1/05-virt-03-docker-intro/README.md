@@ -38,7 +38,7 @@ apt-get install docker-engine containerd docker-compose
 usermod $USER -aG docker
 systemctl enable --now docker
 ```
-Скриншот:
+**Скриншот:**
 
 <img width="1041" height="303" alt="image" src="https://github.com/user-attachments/assets/83725fad-ba98-4d4e-a3ee-63dec555948f" />
 
@@ -46,18 +46,18 @@ systemctl enable --now docker
 
 2. На **hub.docker.com** создан публичный репозиторий с именем **custom-nginx** <https://hub.docker.com/repository/docker/world12dockerhub/custom-nginx/>
 
-Скриншот:
+**Скриншот:**
 
 <img width="1041" height="297" alt="image" src="https://github.com/user-attachments/assets/8e0a3313-d3b7-4af9-9523-b0f1d5e79831" />
 
-3. Скачан образ **nginx:1.29.0**:
+3. Загрузка образа **nginx:1.29.0**:
 
 ```
 docker pull nginx:1.29.0
 docker image list
 ```
 
-Скриншот:
+**Скриншот:**
 
 <img width="1041" height="367" alt="image" src="https://github.com/user-attachments/assets/2510a023-6ad1-440d-ac8f-800f388e2104" />
 
@@ -422,6 +422,163 @@ services:
 7. Удалите любой из манифестов компоуза(например compose.yaml).  Выполните команду "docker compose up -d". Прочитайте warning, объясните суть предупреждения и выполните предложенное действие. Погасите compose-проект ОДНОЙ(обязательно!!) командой.
 
 В качестве ответа приложите скриншоты консоли, где видно все введенные команды и их вывод, файл compose.yaml , скриншот portainer c задеплоенным компоузом.
+
+### Ответ к задаче 5
+
+1. Создана отдельная директория /tmp/netology/docker/task5 и 2 файла внутри него. "compose.yaml" с содержимым:
+```
+mkdir -p /tmp/netology/docker/task5
+tee /tmp/netology/docker/task5/compose.yaml <<-‘EOF’
+version: "3"
+services:
+  portainer:
+    network_mode: host
+    image: portainer/portainer-ce:latest
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+EOF
+```
+
+"docker-compose.yaml" с содержимым:
+
+```
+tee /tmp/netology/docker/task5/docker-compose.yaml <<-‘EOF’
+version: "3"
+services:
+  registry:
+    image: registry:2
+
+    ports:
+    - "5000:5000"
+EOF
+```
+
+Скриншот:
+
+<img width="1041" height="434" alt="image" src="https://github.com/user-attachments/assets/fe8a838f-e541-42f2-86b8-446022559f1f" />
+
+
+<img width="1041" height="415" alt="image" src="https://github.com/user-attachments/assets/53bb850d-a95a-4d15-8093-043c104ade1c" />
+
+1.1. Выполнена команда “docker compose up –d”. Из двух файлов запустился файл compose.yaml, так как у него приоритет выше.
+```
+docker compose up –d
+```
+
+Скриншот:
+
+<img width="1041" height="235" alt="image" src="https://github.com/user-attachments/assets/21500657-2dda-4358-8b0e-43e6793a2f99" />
+
+2. Отредактирован файл **compose.yaml** так, чтобы были запущенны оба файла. 
+
+```
+nano compose.yaml
+```
+
+```
+include:
+  - ./docker-compose.yaml
+
+version: "3"
+services:
+  portainer:
+    network_mode: host
+    image: portainer/portainer-ce:latest
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+```
+
+Скриншот:
+
+<img width="992" height="464" alt="image" src="https://github.com/user-attachments/assets/e06812c9-8118-4a91-9ce6-6395833b2edb" />
+
+```
+docker compose up -d 
+```
+Скриншот:
+
+<img width="1041" height="504" alt="image" src="https://github.com/user-attachments/assets/6e1cfdd2-976a-4a95-a522-0a24a5e11dcc" />
+
+
+3. Выполнение в консоли хостовой ОС необходимых команд чтобы залить образ custom-nginx как custom-nginx:latest в запущенное локальное registry. 
+
+```
+docker tag world12dockerhub/custom-nginx:1.0.0 localhost:5000/custom-nginx:latest
+docker push localhost:5000/custom-nginx:latest
+```
+
+Скриншот:
+
+<img width="1041" height="617" alt="image" src="https://github.com/user-attachments/assets/4428836c-7646-4956-81c9-46e0d0cf46c1" />
+
+4. Сервис portainer доступен по адресу: "https://127.0.0.1:9000", также осуществлен вход в portainer.
+
+Скриншот:
+
+<img width="1041" height="663" alt="image" src="https://github.com/user-attachments/assets/90d21a5a-2b15-4562-b2c4-3b1f56baac53" />
+
+5. Открыта страница "http://127.0.0.1:9000/#!/home", выбрано local окружение. Перешел на вкладку "stacks" и в "web editor" задеплоил следующий компоуз:
+
+```
+version: '3'
+
+services:
+  nginx:
+    image: 127.0.0.1:5000/custom-nginx
+    ports:
+      - "9090:80"
+```
+
+Скриншот:
+
+<img width="1041" height="586" alt="image" src="https://github.com/user-attachments/assets/551efb3e-4404-4163-8505-986dfbbbcf4f" />
+
+6. Переход на страницу "http://127.0.0.1:9000/#!/2/docker/containers", выбрал контейнер с nginx и нажал на кнопку "inspect". В представлении <> Tree развернул поле "Config" и сделал скриншот от поля "AppArmorProfile" до "Driver".
+
+Скриншот:
+
+<img width="1041" height="543" alt="image" src="https://github.com/user-attachments/assets/deeb6a0f-7eae-44d8-8e3d-8d45d2466c7d" />
+
+<img width="1041" height="540" alt="image" src="https://github.com/user-attachments/assets/21386675-bbec-4b82-b5c3-de49c5b67e8a" />
+
+<img width="1041" height="541" alt="image" src="https://github.com/user-attachments/assets/238f34a6-6bfc-44c7-b6ab-6a972be65938" />
+
+
+7. Удаление файла compose.yaml. Выполнение команды "docker compose up -d". 
+Прочитайте warning, объясните суть предупреждения и выполните предложенное действие. Погасите compose-проект ОДНОЙ(обязательно!!) командой.
+
+```
+rm -rf compose.yaml
+docker compose -u d
+docker compose down -d
+```
+
+Скриншот:
+
+<img width="1041" height="196" alt="image" src="https://github.com/user-attachments/assets/aba38170-021d-48c7-9a1b-9d5aa1df7a0c" />
+
+На основе выведенных предупреждений предлагается:
+1.	Удалить строку version из файла docker-compose.yaml, так как этот атрибут больше не нужен и игнорируется.
+
+Скриншот:
+
+<img width="616" height="308" alt="image" src="https://github.com/user-attachments/assets/cb40dd00-7fc0-4e8e-972a-aaf50255b871" />
+
+2.	Очистить осиротевшие контейнеры:
+- либо вручную удалить контейнер task5-portainer-1 командой 
+
+```
+docker rm task5-portainer-1
+```
+- либо при следующем запуске добавить флаг --remove-orphans, чтобы Docker Compose удалил их автоматически.
+```
+docker compose up -d --remove-orphans
+docker compose down
+```
+
+Скриншот:
+
+<img width="1041" height="306" alt="image" src="https://github.com/user-attachments/assets/69fa6c7c-c6fc-4402-a3ee-7cb0ddb8c36f" />
 
 ---
 
