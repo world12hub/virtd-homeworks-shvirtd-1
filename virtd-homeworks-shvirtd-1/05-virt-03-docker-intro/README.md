@@ -72,11 +72,11 @@ COPY index.html /usr/share/nginx/html/index.html
 EXPOSE 80
 EOF
 ```
-Скриншот: 
+**Скриншот:**
 
 <img width="1041" height="133" alt="image" src="https://github.com/user-attachments/assets/76661f3e-e811-4e4e-b20e-b62923d36dca" />
 
-4.2. Создание файла index.html с содержимым:
+4.2. Создание файла **index.html** с содержимым:
 
 ```
 nano index.html
@@ -92,29 +92,31 @@ Hey, Netology
 </html>
 ```
 
-Скриншот:
+**Скриншот:**
 
 <img width="973" height="342" alt="image" src="https://github.com/user-attachments/assets/60399420-1d2b-42eb-8b9d-b3fef4388d73" />
 
 5. Сборка и отправка созданного образ в свой dockerhub-репозитории c tag 1.0.0
 
 5.1. Вход в docker-репозиторий 
+
 ```
 docker login -u world12dockerhub
 Username: username
 Password: password 
 ```
 
-Скриншот:
+**Скриншот:**
 
 <img width="1041" height="331" alt="image" src="https://github.com/user-attachments/assets/1becb13a-08a6-42bd-ba46-6a2b6611d328" />
 
 5.2. Сборка образа
+
 ```
 docker buildx build –t world12dockerhub/custom-nginx:1.0.0 .
 ```
 
-Скриншот:
+**Скриншот:**
 
 <img width="1041" height="351" alt="image" src="https://github.com/user-attachments/assets/4c196104-d0c7-473e-a2fc-fb76bf08a09a" />
 
@@ -124,17 +126,19 @@ docker buildx build –t world12dockerhub/custom-nginx:1.0.0 .
 docker push world12dockerhub/custom-nginx:1.0.0
 ```
 
-Скриншот:
+**Скриншот:**
 
 <img width="1041" height="264" alt="image" src="https://github.com/user-attachments/assets/23cbf96a-71b5-40a5-9a7c-cd6c67742a8e" />
 
 6. Ссылка на репозиторий <https://hub.docker.com/repository/docker/world12dockerhub/custom-nginx/>
 
-Скриншот:
+**Скриншот:**
 
 <img width="1041" height="433" alt="image" src="https://github.com/user-attachments/assets/dfc56f49-120e-406c-bc21-5730e087a2de" />
 
+
 ## Задача 2
+
 1. Запустите ваш образ custom-nginx:1.0.0 командой docker run в соответвии с требованиями:
 - имя контейнера "ФИО-custom-nginx-t2"
 - контейнер работает в фоне
@@ -147,18 +151,19 @@ docker push world12dockerhub/custom-nginx:1.0.0
 
 ### Ответ к задаче 2
 
-1.	Запуск образа custom-nginx:1.0.0
+1.	Запуск образа **custom-nginx:1.0.0**
 ``` 
 docker run --name "kanyugin-sergey-custom-nginx-t2" -p 127.0.0.1:8080:80 -d world12dockerhub/custom-nginx:1.0.0
 ```
 
-Скриншот:
+**Скриншот:**
 
 <img width="1041" height="76" alt="image" src="https://github.com/user-attachments/assets/4f1699d8-58a5-455d-8183-174b0af445ad" />
 
 <img width="1041" height="124" alt="image" src="https://github.com/user-attachments/assets/364df78f-0129-40e0-9527-b79f919c37c9" />
 
 2. Переименование контейнера в "custom-nginx-t2"
+   
 ```
 docker rename kanyugin-sergey-custom-nginx-t2 custom-nginx-t2 
 ```
@@ -168,11 +173,12 @@ docker rename kanyugin-sergey-custom-nginx-t2 custom-nginx-t2
 <img width="1041" height="153" alt="image" src="https://github.com/user-attachments/assets/075306a6-2af3-42d4-a071-1f518a490163" />
 
 3. Выполнение команды:
+   
 ```
 date +"%d-%m-%Y %T.%N %Z" ; sleep 0.150 ; docker ps ; ss -tlpn | grep 127.0.0.1:8080  ; docker logs custom-nginx-t2 -n1 ; docker exec -it custom-nginx-t2 base64 /usr/share/nginx/html/index.html
 ```
 
-Скриншот:
+**Скриншот:**
 
 <img width="1041" height="107" alt="image" src="https://github.com/user-attachments/assets/205f9b26-9da0-4b3e-8a55-481c39e56371" />
 
@@ -182,7 +188,7 @@ date +"%d-%m-%Y %T.%N %Z" ; sleep 0.150 ; docker ps ; ss -tlpn | grep 127.0.0.1:
 curl localhost:8080
 ```
 
-Скриншот:
+**Скриншот:**
 
 <img width="948" height="298" alt="image" src="https://github.com/user-attachments/assets/d33cfde1-78fd-4185-94bf-a4abce50c710" />
 
@@ -204,7 +210,8 @@ curl localhost:8080
 
 ### Ответ к задаче 3
 
-1. Подключение к стандартному потоку ввода/вывода/ошибок контейнера "custom-nginx-t2" осуществляется через команду: 
+1. Подключение к стандартному потоку ввода/вывода/ошибок контейнера "custom-nginx-t2" осуществляется через команду:
+    
 ```
 docker attach <Имя_контенера>
 ```
@@ -215,60 +222,73 @@ docker attach <Имя_контенера>
 docker attach custom-nginx-t2
 ```
 
-Скриншот:
+**Скриншот:**
+
 <img width="1041" height="618" alt="image" src="https://github.com/user-attachments/assets/1a4d5120-65eb-4a88-b30f-804a927e0ac7" />
 
 3. Просмотр всех созданных контейнеров:
+   
 ```
 docker ps –a 
 ```
-Скриншот:
+
+**Скриншот:**
 
 <img width="1041" height="125" alt="image" src="https://github.com/user-attachments/assets/b32c7355-0524-469e-82e6-81f35a4c8708" />
 
 Причина остановки контейнера заключается в том, что подключение было непосредственно к основному процессу контейнера, а комбинация Ctrl-C завершила процесс, соответственно приостановила работу контенйнера.
 
-4. Перезапуск контейнера 
+4. Перезапуск контейнера
+    
 ```
 docker restart custom-nginx-t2
 ```
-Скриншот:
+
+**Скриншот:**
+
 <img width="856" height="87" alt="image" src="https://github.com/user-attachments/assets/06214ff9-56c4-4ab7-89dc-caeac7720c52" />
 
 
 5. Вход в интерактивный терминал контейнера "custom-nginx-t2" с оболочкой bash.
+   
 ```
 docker exec–it custom-nginx-t2 bash
 ```
-Скриншот:
+
+**Скриншот:**
 
 <img width="939" height="75" alt="image" src="https://github.com/user-attachments/assets/f9f76b47-97f4-41f5-8ed0-436eeb585b1d" />
 
-6. Установка текстового редактора nano с помощью apt-get.
+6. Установка текстового редактора nano с помощью **apt-get**.
+ 
 ```
 apt-get update 
 apt-get install nano
 ```
 
-Скриншот:
+**Скриншот:**
 
 <img width="1041" height="440" alt="image" src="https://github.com/user-attachments/assets/b65ffc9f-499e-45f8-929a-5056e314baad" />
- 
+
 7. Отредактирован файл "/etc/nginx/conf.d/default.conf", заменив порт "listen 80" на "listen 81".
+   
 ```
 nano /etc/nginx/conf.d/default.conf
 ```
-Скриншот:
+
+**Скриншот:**
 
 <img width="954" height="316" alt="image" src="https://github.com/user-attachments/assets/17927781-d7fb-460e-84b8-7943020b0267" />
- 
-8. Запомните(!) и выполните команду nginx -s reload, а затем внутри контейнера curl http://127.0.0.1:80 ; curl http://127.0.0.1:81.
+
+8. Запоминание(!) и выполнение команды nginx -s reload, а затем внутри контейнера curl http://127.0.0.1:80 ; curl http://127.0.0.1:81.
+   
 ```
 nginx -s reload
 curl http://127.0.0.1:80 
 curl http://127.0.0.1:81
 ```
-Скриншот:
+
+**Скриншот:**
 
  <img width="1041" height="380" alt="image" src="https://github.com/user-attachments/assets/f2f32513-79f4-4c34-9f8f-14d68dcd745e" />
 
@@ -281,13 +301,15 @@ ss -tlpn | grep 127.0.0.1:8080
 docker port custom-nginx-t2
 curl http://127.0.0.1:8080
 ```
-Скриншот:
+
+**Скриншот:**
 
  <img width="1041" height="259" alt="image" src="https://github.com/user-attachments/assets/a826d84d-a517-4d50-a3ab-b441d60f5fed" />
 
 Проблема в сетевом соединении host-машины с docker-контейнером, из-за внесенных изменений в конфигурационный файл веб-сервера nginx.
 
 11.  Решение проблемы с доступом к веб-ресурсу 127.0.0.1:8080
+
 ```
 docker stop custom-nginx-t2
 docker commit custom-nginx-t2 world12dockerhub/custom-nginx-t2:1.1.0
@@ -297,15 +319,17 @@ docker run --name custom-nginx-t2 -p 127.0.0.1:8080:81 -d world12dockerhub/custo
 curl 127.0.0.1:8080
 ```
 
-Скриншот:
+**Скриншот:**
 
 <img width="1041" height="407" alt="image" src="https://github.com/user-attachments/assets/7376cc94-ce98-4582-b49b-ddd659773760" /> 
 
 12. Удаление запущенного контейнера "custom-nginx-t2", не останавливая его.
+    
 ```
 docker rm –f custom-nginx-t2
 ```
-Скриншот:
+
+**Скриншот:**
 
 <img width="823" height="83" alt="image" src="https://github.com/user-attachments/assets/1bd3a661-2d35-49e6-a44e-9896f6e30078" />
 
@@ -331,7 +355,7 @@ docker rm –f custom-nginx-t2
 docker run -d -v $(pwd):/data --name centos_cont centos:7 sleep infinity
 ```
 
-Скриншот:
+**Скриншот:**
 
 <img width="1041" height="132" alt="image" src="https://github.com/user-attachments/assets/f6f728dc-905a-4013-9cf9-779ca198e7e3" />
 
@@ -340,7 +364,7 @@ docker run -d -v $(pwd):/data --name centos_cont centos:7 sleep infinity
 ```
 docker run -d -v $(pwd):/data --name debian_cont debian:latest sleep infinity
 ```
-Скриншот:
+**Скриншот:**
 
 <img width="1041" height="209" alt="image" src="https://github.com/user-attachments/assets/3344fc5b-3ec2-4b2a-9682-48731262c251" />
 
@@ -351,7 +375,7 @@ docker exec -it centos_cont /bin/bash
 touch /data/file.json 
 exit
 ```
-Скриншот:
+**Скриншот:**
 
 <img width="1033" height="150" alt="image" src="https://github.com/user-attachments/assets/67109fa4-c0a1-4415-bc07-6eaec03e966e" />
  
@@ -361,7 +385,7 @@ exit
 touch new_file.json
 ```
 
-Скриншот:
+**Скриншот:**
 
 <img width="1041" height="98" alt="image" src="https://github.com/user-attachments/assets/fc675a2c-7288-49c4-b900-8ae169d79a3f" /> 
 
@@ -371,7 +395,7 @@ touch new_file.json
 docker exec -it debian_cont /bin/bash
 ls  –ll /data
 ```
-Скриншот:
+**Скриншот:**
 
 <img width="1041" height="248" alt="image" src="https://github.com/user-attachments/assets/2b3307b1-5001-4ed3-a363-55da645b81d4" />
 
@@ -426,6 +450,7 @@ services:
 ### Ответ к задаче 5
 
 1. Создана отдельная директория /tmp/netology/docker/task5 и 2 файла внутри него. "compose.yaml" с содержимым:
+   
 ```
 mkdir -p /tmp/netology/docker/task5
 tee /tmp/netology/docker/task5/compose.yaml <<-‘EOF’
@@ -453,19 +478,19 @@ services:
 EOF
 ```
 
-Скриншот:
+**Скриншот:**
 
 <img width="1041" height="434" alt="image" src="https://github.com/user-attachments/assets/fe8a838f-e541-42f2-86b8-446022559f1f" />
-
 
 <img width="1041" height="415" alt="image" src="https://github.com/user-attachments/assets/53bb850d-a95a-4d15-8093-043c104ade1c" />
 
 1.1. Выполнена команда “docker compose up –d”. Из двух файлов запустился файл compose.yaml, так как у него приоритет выше.
+
 ```
 docker compose up –d
 ```
 
-Скриншот:
+**Скриншот:**
 
 <img width="1041" height="235" alt="image" src="https://github.com/user-attachments/assets/21500657-2dda-4358-8b0e-43e6793a2f99" />
 
@@ -488,14 +513,14 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
 ```
 
-Скриншот:
+**Скриншот:**
 
 <img width="992" height="464" alt="image" src="https://github.com/user-attachments/assets/e06812c9-8118-4a91-9ce6-6395833b2edb" />
 
 ```
 docker compose up -d 
 ```
-Скриншот:
+**Скриншот:**
 
 <img width="1041" height="504" alt="image" src="https://github.com/user-attachments/assets/6e1cfdd2-976a-4a95-a522-0a24a5e11dcc" />
 
@@ -507,13 +532,13 @@ docker tag world12dockerhub/custom-nginx:1.0.0 localhost:5000/custom-nginx:lates
 docker push localhost:5000/custom-nginx:latest
 ```
 
-Скриншот:
+**Скриншот:**
 
 <img width="1041" height="617" alt="image" src="https://github.com/user-attachments/assets/4428836c-7646-4956-81c9-46e0d0cf46c1" />
 
 4. Сервис portainer доступен по адресу: "https://127.0.0.1:9000", также осуществлен вход в portainer.
 
-Скриншот:
+**Скриншот:**
 
 <img width="1041" height="663" alt="image" src="https://github.com/user-attachments/assets/90d21a5a-2b15-4562-b2c4-3b1f56baac53" />
 
@@ -529,13 +554,13 @@ services:
       - "9090:80"
 ```
 
-Скриншот:
+**Скриншот:**
 
 <img width="1041" height="586" alt="image" src="https://github.com/user-attachments/assets/551efb3e-4404-4163-8505-986dfbbbcf4f" />
 
 6. Переход на страницу "http://127.0.0.1:9000/#!/2/docker/containers", выбрал контейнер с nginx и нажал на кнопку "inspect". В представлении <> Tree развернул поле "Config" и сделал скриншот от поля "AppArmorProfile" до "Driver".
 
-Скриншот:
+**Скриншот:**
 
 <img width="1041" height="543" alt="image" src="https://github.com/user-attachments/assets/deeb6a0f-7eae-44d8-8e3d-8d45d2466c7d" />
 
@@ -545,7 +570,6 @@ services:
 
 
 7. Удаление файла compose.yaml. Выполнение команды "docker compose up -d". 
-Прочитайте warning, объясните суть предупреждения и выполните предложенное действие. Погасите compose-проект ОДНОЙ(обязательно!!) командой.
 
 ```
 rm -rf compose.yaml
@@ -553,14 +577,14 @@ docker compose -u d
 docker compose down -d
 ```
 
-Скриншот:
+**Скриншот:**
 
 <img width="1041" height="196" alt="image" src="https://github.com/user-attachments/assets/aba38170-021d-48c7-9a1b-9d5aa1df7a0c" />
 
 На основе выведенных предупреждений предлагается:
 1.	Удалить строку version из файла docker-compose.yaml, так как этот атрибут больше не нужен и игнорируется.
 
-Скриншот:
+**Скриншот:**
 
 <img width="616" height="308" alt="image" src="https://github.com/user-attachments/assets/cb40dd00-7fc0-4e8e-972a-aaf50255b871" />
 
@@ -571,14 +595,18 @@ docker compose down -d
 docker rm task5-portainer-1
 ```
 - либо при следующем запуске добавить флаг --remove-orphans, чтобы Docker Compose удалил их автоматически.
+
 ```
 docker compose up -d --remove-orphans
 docker compose down
 ```
 
-Скриншот:
+**Скриншот:**
 
 <img width="1041" height="306" alt="image" src="https://github.com/user-attachments/assets/69fa6c7c-c6fc-4402-a3ee-7cb0ddb8c36f" />
+
+
+***УРА!!! Я ЭТО СДЕЛАЛ!! ЭТО БЫЛО НЕ ПРОСТО, НО ОЧЕНЬ УВЛЕКАТЕЛЬНО!))))***
 
 ---
 
