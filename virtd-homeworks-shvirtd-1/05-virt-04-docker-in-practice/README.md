@@ -41,6 +41,9 @@ See 'snap info docker' for additional versions.
 3. (Необязательная часть, *) Изучите инструкцию в проекте и запустите web-приложение без использования docker, с помощью venv. (Mysql БД можно запустить в docker run).
 4. (Необязательная часть, *) Изучите код приложения и добавьте управление названием таблицы через ENV переменную.
 ---
+
+### Ответ к задаче 1
+
 1. Сделан fork репозитория https://github.com/world12hub/shvirtd-example-python
 2. Создан файл ```Dockerfile.python``` на основе существующего `Dockerfile`:
    - Содержание  ```Dockerfile.python```
@@ -69,8 +72,6 @@ CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "5000"]
   <img width="815" height="508" alt="image" src="https://github.com/user-attachments/assets/34302b1b-99f2-46e1-91e0-f6bc59ee0826" />
 
 2.1 Используется multistage сборка.
-
-### Ответ к задаче 1
 
 
 ### ВНИМАНИЕ!
