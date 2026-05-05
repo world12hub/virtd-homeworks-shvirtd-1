@@ -24,6 +24,13 @@ See 'snap info docker' for additional versions.
 ```
 В случае наличия установленного в системе ```docker-compose``` - удалите его.  
 2. Убедитесь что у вас УСТАНОВЛЕН ```docker compose```(без тире) версии не менее v2.24.X, для это выполните команду ```docker compose version```  
+
+### Ответ к задаче 0
+2. Результат выполнения команды docker compose version
+3. 
+   <img width="693" height="47" alt="image" src="https://github.com/user-attachments/assets/fb1be106-0ce5-4869-95be-cf91d558f634" />
+
+
 ###  **Своё решение к задачам оформите в вашем GitHub репозитории!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!**
 
 ---
