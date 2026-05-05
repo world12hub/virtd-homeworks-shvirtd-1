@@ -69,7 +69,8 @@ EXPOSE 5000
 CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "5000"] 
 ```
 -  протестирована корректность сборки
-  <img width="815" height="508" alt="image" src="https://github.com/user-attachments/assets/34302b1b-99f2-46e1-91e0-f6bc59ee0826" />
+<img width="819" height="271" alt="image" src="https://github.com/user-attachments/assets/ab98e5da-068e-4b92-87be-807cbd9472b8" />
+
 
 2.1 Используется multistage сборка.
 
