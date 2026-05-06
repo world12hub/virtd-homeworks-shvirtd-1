@@ -155,6 +155,34 @@ services:
 
 <img width="858" height="1098" alt="image" src="https://github.com/user-attachments/assets/eae971e7-7111-406e-8fd8-d38b2500afc9" />
 
+2. Запущен проект при помощи команды
+```
+docker compose up -d
+```
+Скриншот:
+
+<img width="974" height="846" alt="image" src="https://github.com/user-attachments/assets/4f8738c6-bf90-420c-9155-f376bb220fe0" />
+
+<img width="974" height="127" alt="image" src="https://github.com/user-attachments/assets/7e3c8065-d6f9-48ff-94e9-8f7941507a11" />
+
+2.1. Проверка запущенных контейнеров:
+```
+docker ps -a
+```
+
+Скриншот:
+
+![Uploading image.png…]()
+
+2.2. Тестирование curl
+
+```
+curl -L http://127.0.0.1:8090
+```
+
+Скриншот:
+
+![Uploading image.png…]()
 
 
 ## Задача 4
