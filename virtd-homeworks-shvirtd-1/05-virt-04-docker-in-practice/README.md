@@ -169,10 +169,10 @@ docker compose up -d
 ```
 docker ps -a
 ```
-
 Скриншот:
 
-![Uploading image.png…]()
+<img width="974" height="127" alt="image" src="https://github.com/user-attachments/assets/e8a16e60-4eb3-4f71-ad19-042e79deb7e9" />
+
 
 2.2. Тестирование curl
 
@@ -182,7 +182,35 @@ curl -L http://127.0.0.1:8090
 
 Скриншот:
 
-![Uploading image.png…]()
+<img width="974" height="55" alt="image" src="https://github.com/user-attachments/assets/4729f4d2-a248-40c6-a3e9-29d8327c6def" />
+
+3. Подключение к MySQL и выполнение SQL-запросов
+```
+docker exec -ti mysql-db mysql -uroot -pYtReWq4321
+```
+Скриншот:
+
+<img width="974" height="368" alt="image" src="https://github.com/user-attachments/assets/95728bf7-db30-4396-8e24-c718c9125926" />
+
+3.1. В интерактивной оболочке MySQL выполнены следующие команды:
+```
+show databases;
+use virtd;
+show tables;
+SELECT * FROM requests LIMIT 10;
+```
+Скриншот:
+
+<img width="974" height="1000" alt="image" src="https://github.com/user-attachments/assets/e34e056a-a28f-4a99-9162-127a5c4b169d" />
+
+4. Остановка проекта
+
+```
+docker compose down
+```
+Скриншот:
+
+<img width="974" height="225" alt="image" src="https://github.com/user-attachments/assets/a387bc6f-4dcb-456d-a4d5-f366f6c04fad" />
 
 
 ## Задача 4
