@@ -221,6 +221,93 @@ docker compose down
 5. (Необязательная часть) Дополнительно настройте remote ssh context к вашему серверу. Отобразите список контекстов и результат удаленного выполнения ```docker ps -a```
 6. Повторите SQL-запрос на сервере и приложите скриншот и ссылку на fork.
 
+### Ответ к задаче 4
+
+1. Запущена в Yandex Cloud ВМ.
+   
+Скриншот:
+
+<img width="974" height="56" alt="image" src="https://github.com/user-attachments/assets/b3971144-d16d-4b68-bbf6-df2a0df828d5" />
+
+2. Подключение к Вм по ssh и установка docker.
+```
+ssh -i ~/.ssh/<private_key> <user>@<external_IP>
+```
+
+```
+# Add Docker's official GPG key:
+sudo apt update
+sudo apt install ca-certificates curl
+sudo install -m 0755 -d /etc/apt/keyrings
+sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
+sudo chmod a+r /etc/apt/keyrings/docker.asc
+
+# Add the repository to Apt sources:
+sudo tee /etc/apt/sources.list.d/docker.sources <<EOF
+Types: deb
+URIs: https://download.docker.com/linux/ubuntu
+Suites: $(. /etc/os-release && echo "${UBUNTU_CODENAME:-$VERSION_CODENAME}")
+Components: stable
+Architectures: $(dpkg --print-architecture)
+Signed-By: /etc/apt/keyrings/docker.asc
+EOF
+
+sudo apt update
+```
+```
+sudo apt install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+sudo systemctl status docker
+sudo systemctl start docker
+```
+
+Скриншот:
+
+<img width="974" height="303" alt="image" src="https://github.com/user-attachments/assets/f7e1fa59-e0bc-44c0-b32f-9066fda82368" />
+
+3. Написан bash-скрипт, который скачивает fork-репозиторий в каталог /opt и запускает проект целиком.
+```
+#!/bin/bash
+git clone https://github.com/world12hub/shvirtd-example-python.git /opt/myproject
+cd /opt/myproject
+cat > .env <<EOF
+MYSQL_ROOT_PASSWORD="YtReWq4321"
+MYSQL_DATABASE="virtd"
+MYSQL_USER="app"
+MYSQL_PASSWORD="QwErTy1234"
+EOF
+docker compose up -d
+```
+
+Скриншот:
+
+<img width="974" height="344" alt="image" src="https://github.com/user-attachments/assets/d07e120a-3c11-44fe-a221-e871d6ae379e" />
+
+<img width="974" height="480" alt="image" src="https://github.com/user-attachments/assets/126b0682-9345-4178-82b2-7b9830b06c3f" />
+
+4. Проверка http подключений, например(или аналогичный): https://check-host.net/check-http и запуск проверки сервиса http://<внешний_IP-адрес_вашей_ВМ>:8090.
+5. 
+Скриншот:
+<img width="974" height="721" alt="image" src="https://github.com/user-attachments/assets/e72c1a07-c5aa-410c-a850-7bd961fdc3ff" />
+
+Повтор SQL-запроса на сервере и приложите скриншот.
+```
+docker exec -ti mysql-db mysql -uroot -pYtReWq4321
+```
+Скриншот:
+<img width="974" height="287" alt="image" src="https://github.com/user-attachments/assets/e974aba3-72d7-410d-9449-d70630ac9c8d" />
+
+```
+show databases;
+use virtd;
+show tables;
+SELECT * FROM requests LIMIT 10;
+```
+Скриншот:
+<img width="974" height="1035" alt="image" src="https://github.com/user-attachments/assets/b9609126-db45-4b45-8dd1-36b534be265a" />
+
+Ссылка на fork: 
+https://github.com/world12hub/shvirtd-example-python/tree/main 
+
 ## Задача 5 (*)
 1. Напишите и задеплойте на вашу облачную ВМ bash скрипт, который произведет резервное копирование БД mysql в директорию "/opt/backup" с помощью запуска в сети "backend" контейнера из образа ```schnitzler/mysqldump``` при помощи ```docker run ...``` команды. Подсказка: "документация образа."
 2. Протестируйте ручной запуск
@@ -231,9 +318,39 @@ docker compose down
 Скачайте docker образ ```hashicorp/terraform:latest``` и скопируйте бинарный файл ```/bin/terraform``` на свою локальную машину, используя dive и docker save.
 Предоставьте скриншоты  действий .
 
+### Ответ к задаче 6
+
+Скачивание docker образ hashicorp/terraform:latest 
+```
+docker pull hashicorp/terraform:latest
+```
+
+Скриншот:
+<img width="974" height="207" alt="image" src="https://github.com/user-attachments/assets/40d1e5c2-b0df-476d-b58d-9b0e6faebc5d" />
+
+Копирование бинарного файла /bin/terraform на локальную машину, используя docker save. 
+Скриншот:
+<img width="974" height="95" alt="image" src="https://github.com/user-attachments/assets/b6aeeb4b-9c59-4da8-812e-e8f8050d4775" />
+
 ## Задача 6.1
 Добейтесь аналогичного результата, используя docker cp.  
 Предоставьте скриншоты  действий .
+
+### Ответ к задаче 6.1
+
+Задача 6.1
+
+Команды:
+```
+docker run -d --name temp-terraform hashicorp/terraform:latest sleep 10
+docker cp temp-terraform:/bin/terraform ./terraform
+docker rm -f temp-terraform
+./terraform version
+```
+Скриншот:
+
+<img width="974" height="254" alt="image" src="https://github.com/user-attachments/assets/4c38b468-b786-485f-9839-580bf2ab98a7" />
+
 
 ## Задача 6.2 (**)
 Предложите способ извлечь файл из контейнера, используя только команду docker build и любой Dockerfile.  
